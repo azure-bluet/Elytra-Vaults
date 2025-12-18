@@ -1,0 +1,8 @@
+name: ElytraVaults
+version: '1.0.0.0'
+main: io.github.derec4.elytraVaults.ElytraVaults
+api-version: '1.20'
+prefix: DerexXD
+authors: [ DerexXD, AtlasPlays ]
+description: Inspired by AtlasPlays, this changes End City Ships to spawn with Vaults containing the Elytra so multiple people can get one.
+website: https://github.com/DereC4

@@ -1,0 +1,2 @@
+#execute as @e[type=player] at @s if entity @n[tag=key_text,distance=..5] run data merge entity @n[tag=key_text,distance=..5] {text_opacity:255,default_background:1b}
+#execute as @e[type=player] at @s if entity @n[tag=key_text,distance=5..] run data merge entity @n[tag=key_text,distance=5..] {text_opacity:25,default_background:0b}

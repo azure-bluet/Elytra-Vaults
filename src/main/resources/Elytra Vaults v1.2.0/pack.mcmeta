@@ -1,0 +1,6 @@
+{
+  "pack": {
+    "pack_format": 71,
+    "description": "Changes End Ships to use Vaults rather than an Item Frame"
+  }
+}
