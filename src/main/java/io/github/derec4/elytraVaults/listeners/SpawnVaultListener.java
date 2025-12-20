@@ -15,10 +15,8 @@ import static io.github.derec4.elytraVaults.utils.BlockUtils.placeBlock;
 
 public class SpawnVaultListener implements Listener {
 
-    private final ElytraVaults plugin;
 
-    public SpawnVaultListener(ElytraVaults plugin) {
-        this.plugin = plugin;
+    public SpawnVaultListener() {
     }
 
     @EventHandler
@@ -70,8 +68,6 @@ public class SpawnVaultListener implements Listener {
      * Text display is placed as well
      */
     private void processFrame(ItemFrame frame) {
-        plugin.getLogger().info("Found Elytra frame! Converting to diamond block...");
-
 //        pdcManager.markAsProcessed(frame);
 
         Block placedBlock = placeBlock(frame.getLocation(), Material.DIAMOND_BLOCK);
@@ -83,6 +79,5 @@ public class SpawnVaultListener implements Listener {
         // Remove the item frame
         frame.remove();
 
-        plugin.getLogger().info("Frame conversion complete!");
     }
 }

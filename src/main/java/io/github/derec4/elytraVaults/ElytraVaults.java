@@ -1,5 +1,6 @@
 package io.github.derec4.elytraVaults;
 
+import io.github.derec4.elytraVaults.listeners.SpawnVaultListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -8,6 +9,8 @@ public final class ElytraVaults extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        getServer().getPluginManager().registerEvents(new SpawnVaultListener(), this);
+
         // Plugin startup logic
         Bukkit.getLogger().info("");
         Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "  |_______|                             " +
