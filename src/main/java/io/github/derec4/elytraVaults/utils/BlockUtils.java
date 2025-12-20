@@ -3,7 +3,7 @@ package io.github.derec4.elytraVaults.utils;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.data.type.Vault;
+import org.bukkit.block.Vault;
 
 public class BlockUtils {
     public static Block placeBlock(Location location, Material block) {
