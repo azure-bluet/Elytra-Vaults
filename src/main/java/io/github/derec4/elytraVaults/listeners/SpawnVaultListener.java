@@ -12,11 +12,14 @@ import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.inventory.ItemStack;
 
 import static io.github.derec4.elytraVaults.utils.BlockUtils.placeBlock;
+import static io.github.derec4.elytraVaults.utils.BlockUtils.createElytraVault;
 
 public class SpawnVaultListener implements Listener {
 
+    private final ElytraVaults plugin;
 
-    public SpawnVaultListener() {
+    public SpawnVaultListener(ElytraVaults plugin) {
+        this.plugin = plugin;
     }
 
     @EventHandler
@@ -71,6 +74,10 @@ public class SpawnVaultListener implements Listener {
 //        pdcManager.markAsProcessed(frame);
 
         Block placedBlock = placeBlock(frame.getLocation(), Material.VAULT);
+        
+        // Create the vault with the configured key item
+        Material keyItemMaterial = plugin.getConfigManager().getKeyItem();
+        createElytraVault(placedBlock, plugin, keyItemMaterial);
 
 //        if (plugin.getConfigManager().isTextDisplayEnabled()) {
 //            textDisplayManager.spawnDisplay(placedBlock);

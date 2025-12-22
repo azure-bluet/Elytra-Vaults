@@ -24,7 +24,7 @@ public class BlockUtils {
         return targetBlock;
     }
 
-    public static Vault createElytraVault (Block block, JavaPlugin plugin) {
+    public static Vault createElytraVault (Block block, JavaPlugin plugin, Material keyItemMaterial) {
         // 12.19.2025 after looking a ton, this part with loot table can be done SO easily by adding a datapack
         // with this plugin using Paper, but then Spigot servers cant use it. For now I will manually create since
         // it is just one loot table
@@ -33,10 +33,11 @@ public class BlockUtils {
         if (!(block.getState() instanceof Vault vault)) {
             return null;
         }
+
         NamespacedKey lootTableKey = new NamespacedKey(plugin, "elytra_vault");
         LootTable lootTable = Bukkit.getLootTable(lootTableKey);
 
-        vault.setKeyItem(new ItemStack(Material.SHULKER_SHELL));
+        vault.setKeyItem(new ItemStack(keyItemMaterial));
         assert lootTable != null;
         vault.setLootTable(lootTable);
         vault.setDisplayedItem(new ItemStack(Material.ELYTRA));
