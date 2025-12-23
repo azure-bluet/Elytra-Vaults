@@ -1,1 +1,0 @@
-scoreboard objectives add elytraCheck dummy "Check Elytra"

@@ -1,1 +1,0 @@
-execute as @e[type=item_frame] unless entity @e[type=player,distance=..10] run scoreboard players set @s elytraCheck 1
