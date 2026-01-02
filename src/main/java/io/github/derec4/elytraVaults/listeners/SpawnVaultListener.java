@@ -76,11 +76,14 @@ public class SpawnVaultListener implements Listener {
 
         Block placedBlock = placeBlock(frame.getLocation(), Material.VAULT);
 
+        var vaultLocation = placedBlock.getLocation().clone().subtract(0, 1, 0);
+        Block vaultBlock = vaultLocation.getBlock();
+
         Material keyItemMaterial = plugin.getConfigManager().getKeyItem();
-        createElytraVault(placedBlock, plugin, keyItemMaterial);
+        createElytraVault(vaultBlock, plugin, keyItemMaterial);
 
         if (plugin.getConfigManager().isTextDisplayEnabled()) {
-            spawnVaultTextDisplays(placedBlock.getLocation().subtract(0,1,0), keyItemMaterial);
+            spawnVaultTextDisplays(vaultLocation, keyItemMaterial);
         }
 
         frame.remove();
