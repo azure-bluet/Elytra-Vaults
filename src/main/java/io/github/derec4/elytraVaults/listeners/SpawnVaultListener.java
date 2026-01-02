@@ -1,6 +1,7 @@
 package io.github.derec4.elytraVaults.listeners;
 
 import io.github.derec4.elytraVaults.ElytraVaults;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -74,16 +75,18 @@ public class SpawnVaultListener implements Listener {
     private void processFrame(ItemFrame frame) {
 //        pdcManager.markAsProcessed(frame);
 
-        Block placedBlock = placeBlock(frame.getLocation(), Material.VAULT);
+//        Block placedBlock = placeBlock(frame.getLocation(), Material.VAULT);
 
-        var vaultLocation = placedBlock.getLocation().clone().subtract(0, 1, 0);
+        Location frameLocation = frame.getLocation();
+
+        var vaultLocation = frameLocation.clone().subtract(0, 1, 0);
         Block vaultBlock = vaultLocation.getBlock();
 
         Material keyItemMaterial = plugin.getConfigManager().getKeyItem();
         createElytraVault(vaultBlock, plugin, keyItemMaterial);
 
         if (plugin.getConfigManager().isTextDisplayEnabled()) {
-            spawnVaultTextDisplays(vaultLocation, keyItemMaterial);
+            spawnVaultTextDisplays(frameLocation, keyItemMaterial);
         }
 
         frame.remove();
