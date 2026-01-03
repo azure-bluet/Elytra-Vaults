@@ -74,7 +74,6 @@ public class SpawnVaultListener implements Listener {
      */
     private void processFrame(ItemFrame frame) {
 //        pdcManager.markAsProcessed(frame);
-
 //        Block placedBlock = placeBlock(frame.getLocation(), Material.VAULT);
 
         Location frameLocation = frame.getLocation();
@@ -86,7 +85,7 @@ public class SpawnVaultListener implements Listener {
         createElytraVault(vaultBlock, plugin, keyItemMaterial);
 
         if (plugin.getConfigManager().isTextDisplayEnabled()) {
-            spawnVaultTextDisplays(frameLocation, keyItemMaterial);
+            spawnVaultTextDisplays(vaultLocation, keyItemMaterial);
         }
 
         frame.remove();

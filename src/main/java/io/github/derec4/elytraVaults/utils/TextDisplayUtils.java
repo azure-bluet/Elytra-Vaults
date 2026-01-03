@@ -6,29 +6,33 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Display;
 import org.bukkit.entity.TextDisplay;
+import org.bukkit.block.Block;
 
 public class TextDisplayUtils {
     public static void spawnVaultTextDisplays(Location vaultLocation, Material keyItemMaterial) {
-        Location titleLocation = vaultLocation.clone().add(0.5, 0.75, 0.5);
-        vaultLocation.getWorld().spawn(titleLocation, TextDisplay.class, textDisplay -> {
-            textDisplay.text(Component.text("Elytra").color(NamedTextColor.LIGHT_PURPLE));
-            textDisplay.setBillboard(Display.Billboard.CENTER);
-            textDisplay.setBackgroundColor(org.bukkit.Color.fromARGB(0, 0, 0, 0)); // Transparent background
-            textDisplay.setSeeThrough(false);
-            textDisplay.addScoreboardTag("elytra_vault_text");
+        Block block = vaultLocation.getBlock();
+        double cx = block.getX() + 0.5;
+        double cz = block.getZ() + 0.5;
+        double topY = block.getY() + 1.0;
+
+        block.getWorld().spawn(new Location(block.getWorld(), cx, topY + 0.35, cz), TextDisplay.class, td -> {
+            td.text(Component.text("Elytra").color(NamedTextColor.LIGHT_PURPLE));
+            td.setBillboard(Display.Billboard.CENTER);
+            td.setBackgroundColor(org.bukkit.Color.fromARGB(0, 0, 0, 0));
+            td.setSeeThrough(false);
+            td.addScoreboardTag("elytra_vault_text");
         });
 
-        Location subtitleLocation = vaultLocation.clone().add(0.5, 0.5, 0.5);
-        vaultLocation.getWorld().spawn(subtitleLocation, TextDisplay.class, textDisplay -> {
+        block.getWorld().spawn(new Location(block.getWorld(), cx, topY + 0.05, cz), TextDisplay.class, td -> {
             String keyItemName = formatMaterialName(keyItemMaterial);
             Component keyText = Component.text("Open With ")
                     .append(Component.text("[" + keyItemName + "]").color(NamedTextColor.AQUA));
 
-            textDisplay.text(keyText);
-            textDisplay.setBillboard(Display.Billboard.CENTER);
-            textDisplay.setBackgroundColor(org.bukkit.Color.fromARGB(0, 0, 0, 0)); // Transparent background
-            textDisplay.setSeeThrough(false);
-            textDisplay.addScoreboardTag("elytra_vault_text");
+            td.text(keyText);
+            td.setBillboard(Display.Billboard.CENTER);
+            td.setBackgroundColor(org.bukkit.Color.fromARGB(0, 0, 0, 0));
+            td.setSeeThrough(false);
+            td.addScoreboardTag("elytra_vault_text");
         });
     }
 
@@ -47,4 +51,3 @@ public class TextDisplayUtils {
         return formatted.toString();
     }
 }
-
