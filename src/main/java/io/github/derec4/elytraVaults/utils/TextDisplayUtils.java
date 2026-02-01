@@ -4,6 +4,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Display;
 import org.bukkit.entity.TextDisplay;
 import org.bukkit.block.Block;
@@ -24,9 +25,7 @@ public class TextDisplayUtils {
         });
 
         block.getWorld().spawn(new Location(block.getWorld(), cx, topY + 0.05, cz), TextDisplay.class, td -> {
-            String keyItemName = formatMaterialName(keyItemMaterial);
-            Component keyText = Component.text("Open With ")
-                    .append(Component.text("[" + keyItemName + "]").color(NamedTextColor.AQUA));
+            Component keyText = getKeyDisplayText(keyItemMaterial);
 
             td.text(keyText);
             td.setBillboard(Display.Billboard.CENTER);
@@ -36,18 +35,15 @@ public class TextDisplayUtils {
         });
     }
 
-    private static String formatMaterialName(Material material) {
-        String[] words = material.name().toLowerCase().split("_");
-        StringBuilder formatted = new StringBuilder();
+    public static Component getKeyDisplayText(Material keyMaterial) {
+        return Component.text("Open With ")
+                .append(formatMaterialName(keyMaterial).color(NamedTextColor.AQUA));
+    }
 
-        for (int i = 0; i < words.length; i++) {
-            if (i > 0) {
-                formatted.append(" ");
-            }
-            formatted.append(words[i].substring(0, 1).toUpperCase())
-                    .append(words[i].substring(1));
-        }
-
-        return formatted.toString();
+    private static Component formatMaterialName(Material material) {
+        NamespacedKey key = material.getKey();
+        String langkey = String.format("item.%s.%s", key.getNamespace(), key.getKey());
+        return Component.text("[").append(Component.translatable(langkey))
+                .append(Component.text("]"));
     }
 }
